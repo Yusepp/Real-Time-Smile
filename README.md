@@ -30,7 +30,7 @@ pip install wandb
 ```
 
 ## Usage
-
+### Train
 You can train the model using the following command:
 ```bash
 python train.py --batch <BATCH_SIZE> -e <EPOCHS> --patience <EARLYSTOPPING PATIENCE> --mode <prod or dev> --dataset <ROOT_PATH> --logging <OPTIONAL> --augment <OPTIONAL>
@@ -61,8 +61,43 @@ parser.add_argument('--augment', action='store_true', help='Enable data augmenta
 parser.set_defaults(augment=False)
 ```
 
+### Inference
+You can test the model using the following command:
+```bash
+python test.py -w <.pt file> -i <image1.jpg image2.jpg ...... imageN.jpg> 
+```
+or test performance on provided test images running default test:
+```bash
+python test.py -w <.pt file>
+```
+
+With argumetns:
+```python
+parser.add_argument('-w', '--weights', type=str, help='Path to trained weights',
+                    default='best_smile.pt')
+
+parser.add_argument('-i', '--input', nargs='+', help='Sample input image path',
+                    default=['test_images/test_input.jpg','test_images/test_input_2.jpg','test_images/test_input_3.jpg',
+                             'test_images/test_input_4.jpg','test_images/test_input_5.jpg'])
+```
+
+
 ## Results
-TODO  
+Smile Score: 0.9706
+<img src="test_images/test_input.jpg" width="480"/>
+
+Smile Score: 0.9997
+<img src="test_images/test_input_2.jpg" width="480"/>
+
+Smile Score: 0.9995 (Blurred test_input_2)
+<img src="test_images/test_input_4.jpg" width="480"/>
+
+Smile Score: 0.9995 (Low resolution test_input_2)
+<img src="test_images/test_input_5.jpg" width="480"/>
+
+Smile Score: 0.0024 (Non-smiling face)
+<img src="test_images/test_input_3.jpg" width="480"/>
+
 
 ## Downloads
 TODO  
