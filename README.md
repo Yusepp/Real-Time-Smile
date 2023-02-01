@@ -125,4 +125,5 @@ parser.add_argument('-i', '--input', nargs='+', help='Sample input image path',
 
 
 ## Downloads
-TODO  
+You can download the pretrained weights [here](https://drive.google.com/file/d/1DXR0GM6f1yr2sEFYpbG1EwfnmfHHyBFB/view?usp=share_link).
+  
