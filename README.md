@@ -81,6 +81,9 @@ parser.add_argument('-i', '--input', nargs='+', help='Sample input image path',
                              'test_images/test_input_4.jpg','test_images/test_input_5.jpg'])
 ```
 
+## Downloads
+You can download the pretrained weights [here](https://drive.google.com/file/d/1DXR0GM6f1yr2sEFYpbG1EwfnmfHHyBFB/view?usp=share_link).
+
 
 ## Results
 <p>
@@ -121,9 +124,4 @@ parser.add_argument('-i', '--input', nargs='+', help='Sample input image path',
 <p>
     <img src="test_images/test_input_3.jpg" width="320"/>
 </p>
-
-
-
-## Downloads
-You can download the pretrained weights [here](https://drive.google.com/file/d/1DXR0GM6f1yr2sEFYpbG1EwfnmfHHyBFB/view?usp=share_link).
   
