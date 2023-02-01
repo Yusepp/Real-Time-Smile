@@ -89,6 +89,6 @@ You can download the pretrained weights [here](https://drive.google.com/file/d/1
 
 Smile Score: 0.9997 |  Smile Score: 0.9995 (Blurry) | Smile Score: 0.9995 (Low Res.)
 :-------------------------:|:-------------------------:|:-------------------------:
-<img src="test_images/test_input_2.jpg" width="320"/> |  <img src="test_images/test_input_4.jpg" width="320"/>) | <img src="test_images/test_input_5.jpg" width="320"/>
+<img src="test_images/test_input_2.jpg" width="320"/> |  <img src="test_images/test_input_4.jpg" width="320"/> | <img src="test_images/test_input_5.jpg" width="320"/>
 Smile Score: 0.9706 |  Smile Score: 0.0024 |  Smile Score: 0.0024
 <img src="test_images/test_input.jpg" width="320"/> | <img src="test_images/test_input_3.jpg" width="320"/> | <img src="test_images/test_input_3.jpg" width="320"/>
