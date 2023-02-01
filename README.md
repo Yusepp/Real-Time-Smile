@@ -83,20 +83,45 @@ parser.add_argument('-i', '--input', nargs='+', help='Sample input image path',
 
 
 ## Results
-Smile Score: 0.9706
-<img src="test_images/test_input.jpg" width="480"/>
+<p>
+    <em>Smile Score: 0.9706</em>
+</p>
+<p>
+    <img src="test_images/test_input.jpg" width="480"/>
+</p>
 
-Smile Score: 0.9997
-<img src="test_images/test_input_2.jpg" width="480"/>
 
-Smile Score: 0.9995 (Blurred test_input_2)
-<img src="test_images/test_input_4.jpg" width="480"/>
+<p>
+    <em>Smile Score: 0.9997</em>
+</p>
+<p>
+    <img src="test_images/test_input_2.jpg" width="480"/>
+</p>
 
-Smile Score: 0.9995 (Low resolution test_input_2)
-<img src="test_images/test_input_5.jpg" width="480"/>
 
-Smile Score: 0.0024 (Non-smiling face)
-<img src="test_images/test_input_3.jpg" width="480"/>
+<p>
+    <em>Smile Score: 0.9995 (Blurred test_input_2)</em>
+</p>
+<p>
+    <img src="test_images/test_input_4.jpg" width="480"/>
+</p>
+
+
+<p>
+    <em>Smile Score: 0.9995 (Low resolution test_input_2)</em>
+</p>
+<p>
+    <img src="test_images/test_input_5.jpg" width="480"/>
+</p>
+
+
+<p>
+    <em>Smile Score: 0.0024 (Non-smiling face)</em>
+</p>
+<p>
+    <img src="test_images/test_input_3.jpg" width="480"/>
+</p>
+
 
 
 ## Downloads
