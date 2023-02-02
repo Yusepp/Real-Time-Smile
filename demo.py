@@ -34,16 +34,14 @@ while cap.isOpened():
     img = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
     
     # Detect Faces
-    crops, boxes = detect_face(img)
-    imgs = [Image.fromarray(crop) for crop in crops]
-    
+    crops, boxes = detect_face(img)    
 
     # Preprocess
     start_time = time()
-    imgs = tfs(imgs).to(device)
+    crops = tfs(crops).to(device)
     
     # Inference
-    smile_scores = model(imgs)
+    smile_scores = model(crops)
     
     # Save fps
     fps = 1/(time() - start_time)
