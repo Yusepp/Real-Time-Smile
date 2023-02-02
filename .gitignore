@@ -130,6 +130,7 @@ dmypy.json
 
 runs
 *.pt
+*.pth
 
 datasets/WIDER_FACE_YOLO
 Evaluation/ground_truth

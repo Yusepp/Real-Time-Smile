@@ -11,7 +11,7 @@ from torchvision.datasets import ImageFolder
 from model import SmileDetector
 from transforms import get_transforms
 
-#torch.set_float32_matmul_precision(precision)
+#torch.set_float32_matmul_precision('high')
 
 def parse_variables():
     parser = argparse.ArgumentParser(description='Train MobileNetV3 based real time smile detector')

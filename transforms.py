@@ -2,13 +2,17 @@ import albumentations as A
 import numpy as np
 from albumentations.pytorch import ToTensorV2
 import cv2
+import torch
 
 class Transforms:
     def __init__(self, transforms):
         self.transforms = transforms
 
-    def __call__(self, img, *args, **kwargs):
-        return self.transforms(image=np.array(img))['image']
+    def __call__(self, imgs, *args, **kwargs):
+        imgs = [self.transforms(image=np.array(img))['image'].unsqueeze(0) for img in imgs]
+        tf_imgs = torch.Tensor(len(imgs), 3, 224, 224)
+        torch.cat(imgs, out=tf_imgs)
+        return tf_imgs
 
 
 def get_transforms(augmentation=True):
