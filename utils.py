@@ -1,10 +1,13 @@
 import mediapipe as mp
+import numpy as np  
 from mediapipe.python.solutions.drawing_utils import _normalized_to_pixel_coordinates
+from PIL import Image
 
 mp_face_detection = mp.solutions.face_detection
 
 
 def detect_face(img):
+    img = np.array(img)
     crops, boxes = [], []
     image_rows, image_cols, _ = img.shape
     with mp_face_detection.FaceDetection(model_selection=1, min_detection_confidence=0.5) as face_detection:
@@ -28,7 +31,7 @@ def detect_face(img):
             xleft,ytop=rect_start_point
             xright,ybot=rect_end_point
 
-            crops.append(img[ytop: ybot, xleft: xright])
+            crops.append(Image.fromarray(img[ytop: ybot, xleft: xright]))
             boxes.append((xleft, ytop, xright, ybot))
         
         return crops, boxes

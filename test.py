@@ -1,22 +1,30 @@
+import cv2
 import argparse
 import torch
 import torch.backends.cudnn as cudnn
+import numpy as np
 
 from PIL import Image
 from time import time
 from model import SmileDetector
 from transforms import get_transforms
+from utils import detect_face
 
 cudnn.benchmark = True
 
 # Read the arguments
 parser = argparse.ArgumentParser(description='Run Inference RTSD for Smile Detection')
-parser.add_argument('-w', '--weights', type=str, help='Path to trained weights',
-                    default='RTSD_MNetv3.pth')
+parser.add_argument('-w', '--weights', type=str, help='Path to trained weights',default='RTSD_MNetv3.pth')
 
-parser.add_argument('-i', '--input', nargs='+', help='Sample input image path',
-                    default=['test_images/test_input.jpg','test_images/test_input_2.jpg','test_images/test_input_3.jpg',
-                             'test_images/test_input_4.jpg','test_images/test_input_5.jpg'])
+default = [[f, f.replace('.jpg', '_blur.jpg'), f.replace('.jpg', '_low.jpg')] for f in ['test_images/inputs/test_input_1.jpg','test_images/inputs/test_input_2.jpg','test_images/inputs/test_input_3.jpg',
+                             'test_images/inputs/test_input_4.jpg']]
+
+parser.add_argument('-i', '--input', nargs='+', help='Sample input image path', default=sum(default, []))
+
+default = [[f, f.replace('.jpg', '_blur.jpg'), f.replace('.jpg', '_low.jpg')] for f in ['test_images/outputs/test_output_1.jpg','test_images/outputs/test_output_2.jpg','test_images/outputs/test_output_3.jpg',
+                             'test_images/outputs/test_output_4.jpg']]
+
+parser.add_argument('-o', '--output', nargs='+', help='Sample output image path', default=sum(default, []))
 
 args = parser.parse_args()
 variables = vars(args)
@@ -34,18 +42,24 @@ tfs, _ = get_transforms(augmentation=False)
 
 # Run inference
 with torch.no_grad():
-    # Preprocess images
-    start = time()
-    imgs = tfs(imgs).to(device)
-    end = time()
-    print(f'Preprocess time {int((end - start)*1000)}ms ({int((end - start)*1000)//len(variables["input"])}ms/image)')
-    
-    # Infer Model
-    start = time()
-    smile_scores = model(imgs)
-    end = time()
-    print(f'Inference time {int((end - start)*1000)}ms ({int((end - start)*1000)//len(variables["input"])}ms/image)')
-    
-    # Print results
-    for i in range(len(imgs)):
-        print(f"{variables['input'][i]} smile score: {smile_scores[i][0]:.4f}")
+    for i, img in enumerate(imgs):
+        crops, boxes = detect_face(img)
+        
+        # Preprocess images
+        start = time()
+        crops = tfs(crops).to(device)
+        end = time()
+        print(f'Preprocess time {int((end - start)*1000)}ms ({int((end - start)*1000)//len(crops)}ms/image)')
+        
+        # Infer Model
+        start = time()
+        smile_scores = model(crops)
+        end = time()
+        print(f'Inference time {int((end - start)*1000)}ms ({int((end - start)*1000)//len(crops)}ms/image)')
+        
+        img = cv2.cvtColor(np.array(img), cv2.COLOR_RGB2BGR)
+        for (left, top, right, bottom), score in zip(boxes, smile_scores):
+            cv2.rectangle(img, (int(left), int(top)), (int(right), int(bottom)), (255, 0, 255), 2)
+            cv2.putText(img, f'Smile Score: {score[0]:.4f}',(int(left), int(top) - 5), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 255), 2)
+        
+        cv2.imwrite(variables['output'][i], img)
