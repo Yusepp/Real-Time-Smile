@@ -65,21 +65,16 @@ parser.set_defaults(augment=False)
 ### Inference
 You can test the model using the following command:
 ```bash
-python test.py -w <.pt file> -i <image1.jpg image2.jpg ...... imageN.jpg> 
+python test.py -w <.pt file> -i <image1.jpg image2.jpg ...... imageN.jpg> -o <output1.jpg output2.jpg ...... outputN.jpg>
 ```
 or test performance on provided test images running default test:
 ```bash
 python test.py -w <.pt file>
 ```
-
-With argumetns:
-```python
-parser.add_argument('-w', '--weights', type=str, help='Path to trained weights',
-                    default='best_smile.pt')
-
-parser.add_argument('-i', '--input', nargs='+', help='Sample input image path',
-                    default=['test_images/inputs/test_input_1.jpg','test_images/inputs/test_input_2.jpg','test_images/inputs/test_input_3.jpg',
-                             'test_images/inputs/test_input_4.jpg'])
+### Demo
+You can run a real-time demo with your webcam using the following command:
+```bash
+python demo.py -w <.pt file>
 ```
 
 ## Downloads
