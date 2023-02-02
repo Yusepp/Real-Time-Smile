@@ -9,10 +9,13 @@ class Transforms:
         self.transforms = transforms
 
     def __call__(self, imgs, *args, **kwargs):
-        imgs = [self.transforms(image=np.array(img))['image'].unsqueeze(0) for img in imgs]
-        tf_imgs = torch.Tensor(len(imgs), 3, 224, 224)
-        torch.cat(imgs, out=tf_imgs)
-        return tf_imgs
+        if type(imgs) is list:
+            imgs = [self.transforms(image=np.array(img))['image'].unsqueeze(0) for img in imgs]
+            tf_imgs = torch.Tensor(len(imgs), 3, 224, 224)
+            torch.cat(imgs, out=tf_imgs)
+            return tf_imgs
+        
+        return self.transforms(image=np.array(imgs))['image']
 
 
 def get_transforms(augmentation=True):

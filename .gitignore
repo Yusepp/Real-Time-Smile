@@ -116,6 +116,7 @@ venv.bak/
 
 # Rope project settings
 .ropeproject
+datasets
 
 # mkdocs documentation
 /site
@@ -131,6 +132,6 @@ dmypy.json
 runs
 *.pt
 *.pth
-
+datasets/*
 datasets/WIDER_FACE_YOLO
 Evaluation/ground_truth
