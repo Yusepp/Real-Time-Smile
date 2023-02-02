@@ -88,9 +88,9 @@ You can download the pretrained weights [here](https://drive.google.com/file/d/1
 
 ## Results
 
-Original Image | Blurry Image | Downscaled
+Light Conditions | Blurry Image | Downscaled
 :-------------------------:|:-------------------------:|:-------------------------:
-<img src="test_images/outputs/test_output_1.jpg" width="480"/> |  <img src="test_images/outputs/test_output_1_blur.jpg" width="480"/> |  <img src="test_images/outputs/test_output_1_low.jpg" width="480"/>
-<img src="test_images/outputs/test_output_2.jpg" width="480"/> | <img src="test_images/outputs/test_output_2_blur.jpg" width="480"/> |  <img src="test_images/outputs/test_output_2_low.jpg" width="480"/>
-<img src="test_images/outputs/test_output_3.jpg" width="480"/> | <img src="test_images/outputs/test_output_3_blur.jpg" width="480"/> |  <img src="test_images/outputs/test_output_3_low.jpg" width="480"/>
-<img src="test_images/outputs/test_output_4.jpg" width="480"/> | <img src="test_images/outputs/test_output_4_blur.jpg" width="480"/> |  <img src="test_images/outputs/test_output_4_low.jpg" width="480"/>
+<img src="test_images/outputs/test_output_1_light.jpg" width="480"/> |  <img src="test_images/outputs/test_output_1_blur.jpg" width="480"/> |  <img src="test_images/outputs/test_output_1_low.jpg" width="480"/>
+<img src="test_images/outputs/test_output_2_light.jpg" width="480"/> | <img src="test_images/outputs/test_output_2_blur.jpg" width="480"/> |  <img src="test_images/outputs/test_output_2_low.jpg" width="480"/>
+<img src="test_images/outputs/test_output_3_light.jpg" width="480"/> | <img src="test_images/outputs/test_output_3_blur.jpg" width="480"/> |  <img src="test_images/outputs/test_output_3_low.jpg" width="480"/>
+<img src="test_images/outputs/test_output_4_light.jpg" width="480"/> | <img src="test_images/outputs/test_output_4_blur.jpg" width="480"/> |  <img src="test_images/outputs/test_output_4_low.jpg" width="480"/>
