@@ -1,0 +1,140 @@
+{
+    "os": "Linux-5.17.5-76051705-generic-x86_64-with-glibc2.31",
+    "python": "3.10.8",
+    "heartbeatAt": "2023-02-03T16:54:51.724512",
+    "startedAt": "2023-02-03T16:54:51.152748",
+    "docker": null,
+    "cuda": null,
+    "args": [
+        "--batch",
+        "256",
+        "-e",
+        "100",
+        "--patience",
+        "7",
+        "--logging",
+        "--augment",
+        "--mode",
+        "prod",
+        "--dataset",
+        "/home/yusepp/Desktop/DL/celebA_YOLO_crops",
+        "--net",
+        "ShNet"
+    ],
+    "state": "running",
+    "program": "/home/yusepp/Desktop/DL/Real-Time-Smile/train.py",
+    "codePath": "train.py",
+    "git": {
+        "remote": "https://github.com/Yusepp/Real-Time-Smile.git",
+        "commit": "f7195b1002cc3f92f26fff5c3475afd192160f66"
+    },
+    "email": "joseplcam@gmail.com",
+    "root": "/home/yusepp/Desktop/DL/Real-Time-Smile",
+    "host": "pop-os",
+    "username": "yusepp",
+    "executable": "/home/yusepp/miniconda3/bin/python",
+    "cpu_count": 8,
+    "cpu_count_logical": 16,
+    "cpu_freq": {
+        "current": 2540.6170625,
+        "min": 2200.0,
+        "max": 3400.0
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 2200.0,
+            "min": 2200.0,
+            "max": 3400.0
+        },
+        {
+            "current": 3558.201,
+            "min": 2200.0,
+            "max": 3400.0
+        },
+        {
+            "current": 2200.0,
+            "min": 2200.0,
+            "max": 3400.0
+        },
+        {
+            "current": 2200.0,
+            "min": 2200.0,
+            "max": 3400.0
+        },
+        {
+            "current": 2200.0,
+            "min": 2200.0,
+            "max": 3400.0
+        },
+        {
+            "current": 2200.0,
+            "min": 2200.0,
+            "max": 3400.0
+        },
+        {
+            "current": 2200.0,
+            "min": 2200.0,
+            "max": 3400.0
+        },
+        {
+            "current": 2200.0,
+            "min": 2200.0,
+            "max": 3400.0
+        },
+        {
+            "current": 2200.0,
+            "min": 2200.0,
+            "max": 3400.0
+        },
+        {
+            "current": 2200.0,
+            "min": 2200.0,
+            "max": 3400.0
+        },
+        {
+            "current": 2200.0,
+            "min": 2200.0,
+            "max": 3400.0
+        },
+        {
+            "current": 3738.552,
+            "min": 2200.0,
+            "max": 3400.0
+        },
+        {
+            "current": 2200.0,
+            "min": 2200.0,
+            "max": 3400.0
+        },
+        {
+            "current": 2200.0,
+            "min": 2200.0,
+            "max": 3400.0
+        },
+        {
+            "current": 2200.0,
+            "min": 2200.0,
+            "max": 3400.0
+        },
+        {
+            "current": 4450.172,
+            "min": 2200.0,
+            "max": 3400.0
+        }
+    ],
+    "disk": {
+        "total": 907.4602813720703,
+        "used": 222.98109436035156
+    },
+    "gpu": "NVIDIA GeForce RTX 4090",
+    "gpu_count": 1,
+    "gpu_devices": [
+        {
+            "name": "NVIDIA GeForce RTX 4090",
+            "memory_total": 25757220864
+        }
+    ],
+    "memory": {
+        "total": 31.33853530883789
+    }
+}

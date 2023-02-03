@@ -21,6 +21,7 @@ def parse_variables():
     parser.add_argument('-p', '--patience', type=int, help='Number of patience for early stopping', default=0)
     parser.add_argument('-d', '--dataset', type=str, help='Root path to dataset', default='dataset')
     parser.add_argument('-m', '--mode', type=str, help='dev = train; prod = train + val', default='dev')
+    parser.add_argument('-n', '--net', type=str, help='Select backbone', default='MNet-L')
     
     parser.add_argument('--freeze', action='store_true', help='Finetune')
     parser.set_defaults(freeze=False)
@@ -63,7 +64,7 @@ elif variables['mode'] == 'prod':
 
 # Load Model
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-model = SmileDetector(variables['freeze']).to(device)
+model = SmileDetector(net=variables['net'],freeze=variables['freeze']).to(device)
 
 # Train and Test
 if variables['mode'] == 'dev':
@@ -78,6 +79,6 @@ model.evaluate(test_loader, batch_size=BATCH_SIZE)
 if variables['logging']:
     wandb.finish()
     
-# Saving whole model
-torch.save(model, 'best_smile.pt')
-print('Model Saved!')
+# Saving weights model
+torch.save(model.state_dict(), f"{model.net}.pth")
+print("Saved !")

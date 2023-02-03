@@ -1,1 +1,1 @@
-python train.py --batch 256 -e 100 --patience 5 --logging --augment --mode prod --dataset /home/yusepp/Desktop/DL/celebA_YOLO_crops
+python train.py --batch 128 -e 100 --patience 7 --logging --augment --mode prod --dataset /home/yusepp/Desktop/DL/celebA_YOLO_crops --net RNet-50

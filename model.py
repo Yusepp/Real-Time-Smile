@@ -7,6 +7,10 @@ import torch.optim as optim
 
 import torch.nn.functional as F
 from torchvision.models import mobilenet_v3_large, MobileNet_V3_Large_Weights
+from torchvision.models import mobilenet_v3_small, MobileNet_V3_Small_Weights
+from torchvision.models import resnet50, ResNet50_Weights
+from torchvision.models import shufflenet_v2_x1_0, ShuffleNet_V2_X1_0_Weights
+
 from torchmetrics.classification import BinaryPrecision, BinaryRecall, BinaryAccuracy, BinaryF1Score
 
 from early import EarlyStopper
@@ -14,26 +18,16 @@ from log import *
 
 
 class SmileDetector(nn.Module):
-    def __init__(self, freeze=False):
+    def __init__(self, net='MNet-L', freeze=False):
         super(SmileDetector, self).__init__()
         
-        # Funcs
         self.loss_fn = None
         self.opt = None
         self.early_stopping = None
+        self.freeze = freeze
+        self.net = net
         
-        # Load MNetV3_Large pretrained on  ImageNet
-        self.backbone = mobilenet_v3_large(weights=MobileNet_V3_Large_Weights.DEFAULT)
-        
-        # If freeze, we freeze all except last 2 layers
-        if freeze:
-            for param in list(self.backbone.parameters())[:-2]:
-                param.requires_grad = False
-                
-        # We build the backbone
-        backbone_features = 960 # Number of Features obtained by the backbone
-        modules = list(self.backbone.children())[:-1]
-        self.backbone = nn.Sequential(*modules)
+        self.backbone, backbone_features = self.get_backbone()
         
         # Landmark Features
         self.flatten = nn.Flatten()
@@ -220,3 +214,71 @@ class SmileDetector(nn.Module):
                 log_epoch({"Val. Loss": running_loss/steps, "Val. Accuracy": acc, "Val. Precision": prec, "Val. Recall": rec, "Val. F1": f1})
             
         return running_loss/steps
+    
+    
+    
+    
+    
+    def get_backbone(self):
+        
+        if self.net == 'MNet-L':
+            # Load MNetV3_Large pretrained on  ImageNet
+            backbone = mobilenet_v3_large(weights=MobileNet_V3_Large_Weights.DEFAULT)
+            
+            # If freeze, we freeze all except last 2 layers
+            if self.freeze:
+                for param in list(self.backbone.parameters())[:-2]:
+                    param.requires_grad = False
+
+            # We build the backbone
+            backbone_features = 960 # Number of Features obtained by the backbone
+            modules = list(backbone.children())[:-1]
+            backbone = nn.Sequential(*modules)
+        
+        elif self.net == 'MNet-S':
+            # Load MNetV3_Small pretrained on  ImageNet
+            backbone = mobilenet_v3_small(weights=MobileNet_V3_Small_Weights.DEFAULT)
+            
+            # If freeze, we freeze all except last 2 layers
+            if self.freeze:
+                for param in list(self.backbone.parameters())[:-2]:
+                    param.requires_grad = False
+
+            # We build the backbone
+            backbone_features = 576 # Number of Features obtained by the backbone
+            modules = list(backbone.children())[:-1]
+            backbone = nn.Sequential(*modules)
+        
+        
+        elif self.net == 'RNet-50':
+            # Load ResNet-50 pretrained on  ImageNet
+            backbone = resnet50(weights=ResNet50_Weights.DEFAULT)
+            
+            # If freeze, we freeze all except last 2 layers
+            if self.freeze:
+                for param in list(backbone.parameters())[:-2]:
+                    param.requires_grad = False
+
+            # We build the backbone
+            backbone_features = 2048 # Number of Features obtained by the backbone
+            modules = list(backbone.children())[:-1]
+            backbone = nn.Sequential(*modules)
+        
+        
+        elif self.net == 'ShNet':
+            # Load ShuffleNetV2 pretrained on  ImageNet
+            backbone = shufflenet_v2_x1_0(weights=ShuffleNet_V2_X1_0_Weights.DEFAULT)
+            
+            # If freeze, we freeze all except last 2 layers
+            if self.freeze:
+                for param in list(self.backbone.parameters())[:-2]:
+                    param.requires_grad = False
+
+            # We build the backbone
+            backbone_features = 1024 # Number of Features obtained by the backbone
+            modules = list(backbone.children())[:-1] + [nn.AvgPool2d(7)]
+            backbone = nn.Sequential(*modules)
+            
+        
+        
+        return backbone, backbone_features
