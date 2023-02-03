@@ -135,3 +135,5 @@ runs
 datasets/*
 datasets/WIDER_FACE_YOLO
 Evaluation/ground_truth
+wandb
+wandb/*
