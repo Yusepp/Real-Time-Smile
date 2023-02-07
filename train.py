@@ -78,7 +78,3 @@ model.evaluate(test_loader, batch_size=BATCH_SIZE)
 # Finishing wandb process
 if variables['logging']:
     wandb.finish()
-    
-# Saving weights model
-torch.save(model.state_dict(), f"{model.net}.pth")
-print("Saved !")

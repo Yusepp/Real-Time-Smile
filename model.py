@@ -12,6 +12,7 @@ from torchvision.models import resnet50, ResNet50_Weights
 from torchvision.models import shufflenet_v2_x1_0, ShuffleNet_V2_X1_0_Weights
 
 from torchmetrics.classification import BinaryPrecision, BinaryRecall, BinaryAccuracy, BinaryF1Score
+from PolyLoss import PolyBCELoss
 
 from early import EarlyStopper
 from log import *
@@ -94,6 +95,7 @@ class SmileDetector(nn.Module):
         
         # Optimizer and loss function
         self.loss_fn = nn.BCELoss()
+        self.loss_fn = PolyBCELoss()
         self.opt = optim.SGD(self.parameters(), lr=0.001, momentum=0.9)
         steps = len(train_data.dataset)//batch_size
         
@@ -161,6 +163,13 @@ class SmileDetector(nn.Module):
                 break
             print("")
             
+        if type(self.loss_fn) is type(PolyBCELoss()):
+            # Saving weights model
+            torch.save(self.state_dict(), f"{self.net}_poly.pth")
+        else:
+            torch.save(self.state_dict(), f"{self.net}.pth")
+            
+        print("Saved !")
         print("Finished training!")
 
     
@@ -176,6 +185,7 @@ class SmileDetector(nn.Module):
         # Funcs
         if not self.loss_fn:
             self.loss_fn = nn.BCELoss()
+            self.loss_fn = PolyBCELoss()
             self.opt = optim.SGD(self.parameters(), lr=0.001, momentum=0.9)
         
         # Metrics
