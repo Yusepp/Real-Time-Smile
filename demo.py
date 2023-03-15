@@ -6,7 +6,7 @@ from PIL import Image
 from time import time, sleep
 from transforms import get_transforms
 from model import SmileDetector
-from utils import detect_face, get_intensity_plot_array
+from utils_smile import detect_face, get_intensity_plot_array
 
 # Read the arguments
 parser = argparse.ArgumentParser(description='Run Inference RTSD for Smile Detection')

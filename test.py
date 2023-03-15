@@ -8,7 +8,7 @@ from PIL import Image
 from time import time
 from model import SmileDetector
 from transforms import get_transforms
-from utils import detect_face
+from utils_smile import detect_face
 
 cudnn.benchmark = True
 
